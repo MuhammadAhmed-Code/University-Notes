@@ -1,34 +1,33 @@
 class LCS {
-
-    int[][] buildTable(String s1, String s2) {
-        int n = s1.length();
-        int m = s2.length();
-        int[][] dp = new int[n + 1][m + 1];
+    StringBuilder sb = new StringBuilder();
+    int[][] buildTable(String name, String string) {
+        int n = name.length();
+        int m = string.length();
+        int[][] dynamic = new int[n + 1][m + 1];
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
-                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                if (name.charAt(i - 1) == string.charAt(j - 1)) {
+                    dynamic[i][j] = 1 + dynamic[i - 1][j - 1];
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    dynamic[i][j] = Math.max(dynamic[i - 1][j], dynamic[i][j - 1]);
                 }
             }
         }
-        return dp;
+        return dynamic;
     }
 
-    String getLCSString(int[][] dp, String s1, String s2) {
-        int i = s1.length();
-        int j = s2.length();
-        StringBuilder sb = new StringBuilder();
+    String getLCSString(int[][] dynamic, String name, String string) {
+        int i = name.length();
+        int j = string.length();
 
         while (i > 0 && j > 0) {
-            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-                sb.append(s1.charAt(i - 1));
+            if (name.charAt(i - 1) == string.charAt(j - 1)) {
+                sb.append(name.charAt(i - 1));
                 i--;
                 j--;
             }
-            else if (dp[i - 1][j] >= dp[i][j - 1]) {
+            else if (dynamic[i - 1][j] >= dynamic[i][j - 1]) {
                 i--;
             }
             else {
@@ -38,18 +37,18 @@ class LCS {
         return sb.reverse().toString();
     }
 
-    void printTable(int[][] dp, String s1, String s2) {
+    void printTable(int[][] dynamic, String name, String string) {
         System.out.print("   ");
-        for (char c : s2.toCharArray()) {
+        for (char c : string.toCharArray()) {
             System.out.printf("%3c", c);
         }
         System.out.println();
 
-        for (int i = 0; i < s1.length(); i++) {
-            System.out.print(s1.charAt(i) + "  ");
+        for (int i = 0; i < name.length(); i++) {
+            System.out.print(name.charAt(i) + "  ");
 
-            for (int j = 1; j <= s2.length(); j++) {
-                System.out.printf("%3d", dp[i + 1][j]);
+            for (int j = 1; j <= string.length(); j++) {
+                System.out.printf("%3d", dynamic[i + 1][j]);
             }
             System.out.println();
         }
@@ -57,21 +56,21 @@ class LCS {
 
     public void display(){
 
-        String string1 = "MUHAMMADAHMED";
-        String string2 = "ETAOINSHR";
+        String name = "MUHAMMADAHMED";
+        String string = "ETAOINSHR";
 
-        System.out.println("String 1 : " + string1);
-        System.out.println("String 2 : " + string2);
+        System.out.println("String 1 : " + name);
+        System.out.println("String 2 : " + string);
 
-        int[][] dp = buildTable(string1, string2);
+        int[][] dp = buildTable(name, string);
 
         System.out.println("Dynamic Programming Table:");
-        printTable(dp, string1, string2);
+        printTable(dp, name, string);
 
-        String lcsString = getLCSString(dp, string1, string2);
+        String lcsString = getLCSString(dp, name, string);
 
         System.out.println("\nResults:");
-        System.out.println("LCS Length : " + dp[string1.length()][string2.length()]);
+        System.out.println("LCS Length : " + dp[name.length()][string.length()]);
         System.out.println("LCS String : " + lcsString);
     }
 }
