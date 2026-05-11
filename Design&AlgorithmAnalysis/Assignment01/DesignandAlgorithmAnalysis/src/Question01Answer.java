@@ -76,22 +76,3 @@ public class Question01Answer {
         al.adjacentList();
     }
 }
-
-//Results are
-//There are three formats for graph representation and storage:
-//1. Adjacency Matrix:
-//A 2D array of size N×N where N is the number of vertices. If vertex i is connected to vertex j, the value is 1, otherwise 0. Checking if edge (u,v) exists takes O(1) time. Identifying all edges takes O(N²) time. Space required is O(N²).
-//2. Adjacency List:
-//Each vertex stores a list of its neighboring vertices. Space required is O(N+M) where N is vertices and M is edges. Checking if edge (u,v) exists takes O(degree of u) time. Identifying all edges takes O(N+M) time.
-//3. Edge List:
-//A simple list of all edges stored as pairs of vertices. Example: [(0,1), (0,2), (1,2)]. Space required is O(M) where M is total number of edges. Simple to implement but slower to search.
-//Adjacency Matrix:
-//[0, 1, 1, 1]
-//[1, 0, 1, 1]
-//[1, 1, 0, 1]
-//[1, 1, 1, 0]
-//Adjacency List:
-//0 -> [1, 2, 3]
-//1 -> [0, 2, 3]
-//2 -> [0, 1, 3]
-//3 -> [0, 1, 2]
